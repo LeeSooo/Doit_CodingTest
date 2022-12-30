@@ -1,4 +1,4 @@
-package chap01;
+package chap01_TimeComplexity;
 
 /* < 시간 복잡도 예제 코드 >
  * 빅-오메가 표기법 : 1번

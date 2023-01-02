@@ -1,5 +1,24 @@
 package chap03_DataStructure;
 
+/* 004번 문제 : n * n개의 수가 n * n 크기의 표에 채워져 있다. 표 안의 수 중(x1, y1)에서 (x2, y2)까지의 합을 구하려 한다.'
+ * - d[x][y] = 원본 배열의 (0, 0)부터 (x, y)까지의 사각형 영역 안에 있는 수의 합
+ * 
+ * 입력
+ *  (1) 1번째 입력 - 제공되는 숫자의 개수 n, 구간 합을 구해야 하는 줄의 개수 m 입력받기
+ *  (2) 2번째 입력 - 구간 합을 구해야 하는 줄의 개수 m 입력받기
+ *  (3) 3번째 입력 - n * n 표 안에 채워질 수를 입력받기
+ *  (4) 4번째 입력 - 구간합 배열 자리 입력받기(x1, x2, y1, y2)
+ * 
+ * 출력
+ * - 표에서 (x1, y1)에서 (x2, y2)까지의 합을 출력.
+ */
+
+/* <슈도코드>
+ *  (1) 1번째 입력 - 제공되는 숫자의 개수 n, 구간 합을 구해야 하는 줄의 개수 m 입력받기
+ *  (2) 2번째 입력 - 구간 합을 구해야 하는 줄의 개수 m 입력받기
+ *  (3) 3번째 입력 - n * n 표 안에 채워질 수를 입력받기
+ *  (4) 4번째 입력 - 구간합 배열 자리 입력받기(x1, x2, y1, y2)
+ */
 
 import java.io.IOException;
 import java.io.BufferedReader;
@@ -10,16 +29,36 @@ public class Q004_P11660 {
 	public static void main(String[] args) throws IOException{
 		BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
 		StringTokenizer st = new StringTokenizer(br.readLine());
-		int n = Integer.parseInt(st.nextToken());
-		int m = Integer.parseInt(st.nextToken());
-		int[][] a = new int[n+1][n+1];
+		int n = Integer.parseInt(st.nextToken());	// 표의 크기(행, 열)
+		int m = Integer.parseInt(st.nextToken());	// 구해야 하는 합의 개수
 		
-		for(int i = 1; i<=n; i++) {
+		// (1) 표 채워넣기
+		int[][] a = new int[n+1][n+1];	
+		for(int i = 1; i <= n; i++) {
 			st = new StringTokenizer(br.readLine());
+			
+			for(int j = 1; j <= n; j++)
+				a[i][j] = Integer.parseInt(st.nextToken());
+		}
+		
+		int d[][] = new int[n+1][n+1];
+		for(int i = 1; i <= n; i++) {
 			for(int j = 1; j <= n; j++) {
+				// 구간 합 구하기
+				d[i][j] = d[i][j-1] + d[i-1][j] - d[i-1][j-1] + a[i][j];
 			}
 		}
 		
+		for(int i = 0; i < m; i++) {
+			st = new StringTokenizer(br.readLine());
+			int x1 = Integer.parseInt(br.readLine());
+			int x2 = Integer.parseInt(br.readLine());
+			int y1 = Integer.parseInt(br.readLine());
+			int y2 = Integer.parseInt(br.readLine());
+			
+			// 구간 합 배열로 질의에 답변하기
+			int result = d[x2][y2] - d[x1 - 1][y2] - d[x2][y1 - 1] + d[x1 - 1][y1 - 1];
+			System.out.println(result);
+		}
 	}
-
 }

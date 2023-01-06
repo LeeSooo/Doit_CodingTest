@@ -4,7 +4,7 @@ package chap03_DataStructure;
  * - d[x][y] = 원본 배열의 (0, 0)부터 (x, y)까지의 사각형 영역 안에 있는 수의 합
  * 
  *   조건 : 1 <= n <= 1024, 1 <= M <= 100000
- * 			=> "100000번" = 구간마다 합을 매번 계산하면 시간 안에 계산을 못 끝냄. => 구간 합 배열을 이용해야 함.(중요) 
+ * 			=> "100000번" = 구간마다 합을 매번 계산하면 시간 안에 계산을 못 끝냄. => 구간 합 배열을 이용해야 함.(중요)
  * 
  * <입력>
  *  (1) 1번째 입력 - 제공되는 숫자의 개수 n, 구간 합을 구해야 하는 줄의 개수 m 입력받기
@@ -57,10 +57,10 @@ public class Q004_P11660 {
 		// (4) 4번째 입력 - 질문에 대한 입력(구간합 배열 자리 입력받기(x1, x2, y1, y2))을 받고 출력하기.
 		for(int i = 0; i < m; i++) {
 			st = new StringTokenizer(br.readLine());
-			int x1 = Integer.parseInt(br.readLine());
-			int x2 = Integer.parseInt(br.readLine());
-			int y1 = Integer.parseInt(br.readLine());
-			int y2 = Integer.parseInt(br.readLine());
+			int x1 = Integer.parseInt(st.nextToken());
+			int x2 = Integer.parseInt(st.nextToken());
+			int y1 = Integer.parseInt(st.nextToken());
+			int y2 = Integer.parseInt(st.nextToken());
 			
 			// 구간 합 배열로 질의에 답변하기
 			int result = d[x2][y2] - d[x1 - 1][y2] - d[x2][y1 - 1] + d[x1 - 1][y1 - 1];
